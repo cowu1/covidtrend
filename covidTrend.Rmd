@@ -1,0 +1,41 @@
+---
+title: "covidTrend"
+output: html_document
+---
+```{r}
+library(tidyverse)
+data <- read_csv("owid-covid-data.csv")
+print(data)
+```
+```{r}
+library(dplyr)
+```
+```{r}
+filteredUS <- data %>%
+  select(location,new_cases,new_deaths) %>%
+  filter(location == "United States") 
+summary(filteredUS)
+```
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+covid_data <- read.csv("owid-covid-data.csv")
+head(covid_data)
+filtered_two <- covid_data %>% 
+  filter(location %in% c("Afghanistan", "United States"))
+ggplot(filtered_two, aes(x= date, y = new_cases, color = location)) + geom_line() +
+  labs(
+    title = "New Cases over Time in US + Afghanistan",
+    x = "date",
+    y = "number of new cases",
+    color = "country"
+  ) + geom_point(size = 0.5, alpha = 0.5) + geom_smooth(method = lm, se = F)
+  
+```
+
+
+
+
+
